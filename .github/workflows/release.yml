@@ -20,7 +20,6 @@ jobs:
         package-name: addons-api
         bump-minor-pre-major: true
         version-file: "lib/addons-api/version.rb"
-        release-as: 1.0.7
     
     # Checkout code if release was created
     - uses: actions/checkout@v3
@@ -40,7 +39,6 @@ jobs:
     # Publish to RubyGems if a release was created
     - name: Publish to RubyGems
       run: |
-        cd ruby
         mkdir -p $HOME/.gem
         touch $HOME/.gem/credentials
         chmod 0600 $HOME/.gem/credentials
