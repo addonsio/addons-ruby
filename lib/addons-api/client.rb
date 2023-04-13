@@ -106,7 +106,7 @@ module AddonsApi
       end
     end
 
-    # Add-on services represent add-ons that may be provisioned for apps.
+    # Addon services represent addons that may be provisioned for apps.
     class OAuth
       BASE_PATH = "oauth" 
 
@@ -167,7 +167,7 @@ module AddonsApi
         @member_resource ||= Member.new(@client)
       end
 
-      # Add-on resource
+      # Addon resource
       def addon
         @addon_resource ||= Addon.new(@client)
       end
@@ -184,7 +184,7 @@ module AddonsApi
         end
       end
       
-      # Add-on
+      # Addon
       class Addon
         def initialize(client)
           @client = client
@@ -206,56 +206,56 @@ module AddonsApi
           @client.request(:get, "", base_url: callback_url)
         end
 
-        # Configuration of an Add-on
+        # Configuration of an Addon
         class Config
           def initialize(client)
             @client = client
           end
 
-          # Get the configuration of an add-on.
+          # Get the configuration of an addon.
           def list(team_id, addon_id)
             @client.request(:get, "#{BASE_PATH}/#{team_id}/addons/#{addon_id}/config")
           end
 
-          # Get the configuration of an add-on with callback URL.
+          # Get the configuration of an addon with callback URL.
           def list_with_callback_url(callback_url)
             @client.request(:get, "config", base_url: callback_url)
           end
 
-          # Update the configuration of an add-on.
+          # Update the configuration of an addon.
           def update(team_id, addon_id, body = {})
             @client.request(:patch, "#{BASE_PATH}/#{team_id}/addons/#{addon_id}/config", body: body)
           end
 
-          # Update the configuration of an add-on with callback URL.
+          # Update the configuration of an addon with callback URL.
           def update_with_callback_url(callback_url, body = {})
             @client.request(:patch, "config", base_url: callback_url, body: body)
           end
         end
 
-        # Add-on Actions are lifecycle operations for add-on provisioning and deprovisioning. 
-        # They allow add-on providers to (de)provision add-ons in the background and then report back when (de)provisioning is complete.
+        # Addon Actions are lifecycle operations for addon provisioning and deprovisioning. 
+        # They allow addon providers to (de)provision addons in the background and then report back when (de)provisioning is complete.
         class Action
           def initialize(client)
             @client = client
           end
 
-          # Mark an add-on as provisioned.
+          # Mark an addon as provisioned.
           def provision(team_id, addon_id)
             @client.request(:post, "#{BASE_PATH}/#{team_id}/addons/#{addon_id}/actions/provision")
           end
 
-          # Mark an add-on as provisioned with callback URL.
+          # Mark an addon as provisioned with callback URL.
           def provision_with_callback_url(callback_url)
             @client.request(:post, "actions/provision", base_url: callback_url)
           end
 
-          # Mark an add-on as deprovisioned.
+          # Mark an addon as deprovisioned.
           def deprovision(team_id, addon_id)
             @client.request(:post, "#{BASE_PATH}/#{team_id}/addons/#{addon_id}/actions/deprovision")
           end
 
-          # Mark an add-on as deprovisioned with callback URL.
+          # Mark an addon as deprovisioned with callback URL.
           def deprovision_with_callback_url(callback_url)
             @client.request(:post, "actions/deprovision", base_url: callback_url)
           end
