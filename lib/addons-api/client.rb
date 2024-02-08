@@ -100,6 +100,11 @@ module AddonsApi
         @oauth_resource ||= OAuth.new(self)
       end
 
+      # AddonService resource
+      def addon_service
+        @addon_service_resource ||= AddonService.new(self)
+      end
+
       # Team resource
       def team
         @team_resource ||= Team.new(self)
@@ -144,6 +149,58 @@ module AddonsApi
             client_secret: client[:secret],
           })
           token
+        end
+      end
+    end
+
+    class AddonService
+      BASE_PATH = "addon-services"
+
+      def initialize(client)
+        @client = client
+      end
+
+      def list()
+       @client.request(:get, "#{BASE_PATH}")
+      end
+
+      def info(addon_service_id)
+        @client.request(:get, "#{BASE_PATH}/#{addon_service_id}")
+      end
+
+      def plan
+        @plan_resource ||= AddonServicePlan.new(@client)
+      end
+
+      def field
+        @field_resource ||= AddonServiceField.new(@client)
+      end
+
+      class AddonServicePlan
+        def initialize(client)
+          @client = client
+        end
+
+        def list(addon_service_id)
+          @client.request(:get, "#{BASE_PATH}/#{addon_service_id}/plans")
+        end
+
+        def info(addon_service_id, addon_service_plan_id)
+          @client.request(:get, "#{BASE_PATH}/#{addon_service_id}/plans/#{addon_service_plan_id}")
+        end
+      end
+
+      class AddonServiceField
+        def initialize(client)
+          @client = client
+        end
+
+        def list(addon_service_id)
+          @client.request(:get, "#{BASE_PATH}/#{addon_service_id}/fields")
+        end
+
+        def info(addon_service_id, addon_service_field_id)
+          @client.request(:get, "#{BASE_PATH}/#{addon_service_id}/fields/#{addon_service_plan_id}")
         end
       end
     end
@@ -204,6 +261,18 @@ module AddonsApi
 
         def info_by_callback_url(callback_url)
           @client.request(:get, "", base_url: callback_url)
+        end
+
+        def create(team_id, body = {})
+          @client.request(:post, "#{BASE_PATH}/#{team_id}/addons", body: body)
+        end
+
+        def delete(team_id, addon_id)
+          @client.request(:delete, "#{BASE_PATH}/#{team_id}/addons/#{addon_id}")
+        end
+
+        def update(team_id, addon_id, body = {})
+          @client.request(:patch, "#{BASE_PATH}/#{team_id}/addons/#{addon_id}", body: body)
         end
 
         # Configuration of an Addon

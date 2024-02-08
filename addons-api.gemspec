@@ -12,7 +12,7 @@ Gem::Specification.new do |spec|
   spec.email         = ['moty@crazyantlabs.com']
   spec.description   = 'Ruby HTTP client for the Addons.io API.'
   spec.summary       = 'Ruby HTTP client for the Addons.io API. Learn more on https://addons.io'
-  spec.homepage      = 'https://github.com/addonsio/ruby-sdk'
+  spec.homepage      = 'https://github.com/addonsio/addons-ruby'
   spec.license       = 'MIT'
 
   spec.files         = Dir.chdir(File.expand_path('..', __FILE__)) do
