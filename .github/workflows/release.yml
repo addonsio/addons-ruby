@@ -13,23 +13,21 @@ jobs:
       pull-requests: write
 
     steps:
-    - uses: google-github-actions/release-please-action@v3
+    - uses: google-github-actions/release-please-action@v4
       id: release
       with:
-        release-type: ruby
-        package-name: addons-api
-        bump-minor-pre-major: true
-        version-file: "lib/addons-api/version.rb"
+        token: ${{secrets.RELEASE_PLEASE_GITHUB_TOKEN}}
+        config-file: release-please-config.json
     
     # Checkout code if release was created
     - uses: actions/checkout@v3
       if: ${{ steps.release.outputs.release_created }}
     
     # Set up Ruby if a release was created
-    - name: Set up Ruby 3.1
+    - name: Set up Ruby 3.2
       uses: ruby/setup-ruby@v1
       with:
-        ruby-version: 3.1
+        ruby-version: 3.2
       if: ${{ steps.release.outputs.release_created }}
     
     # Bundle install if a release was created
