@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.1.0](https://github.com/addonsio/addons-ruby/compare/addons-api/v1.0.9...addons-api/v1.1.0) (2024-02-12)
+
+
+### Features
+
+* bump release ([#10](https://github.com/addonsio/addons-ruby/issues/10)) ([12f4f8e](https://github.com/addonsio/addons-ruby/commit/12f4f8ed48ce69179026d4866054dfaae3187814))
+* release 1.0.10 ([12f4f8e](https://github.com/addonsio/addons-ruby/commit/12f4f8ed48ce69179026d4866054dfaae3187814))
+
 ## [1.0.9](https://github.com/addonsio/addons-ruby/compare/addons-api-v1.0.8...addons-api/v1.0.9) (2024-02-08)
 
 
