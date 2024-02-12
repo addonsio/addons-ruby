@@ -247,6 +247,10 @@ module AddonsApi
           @client = client
         end
 
+        def sso(team_id, addon_id, body = {})
+          @sso_resource ||= Sso.new(@client)
+        end 
+
         def action
           @action_resource ||= Action.new(@client)
         end
@@ -273,6 +277,22 @@ module AddonsApi
 
         def update(team_id, addon_id, body = {})
           @client.request(:patch, "#{BASE_PATH}/#{team_id}/addons/#{addon_id}", body: body)
+        end
+
+        class Sso
+          def initialize(client)
+            @client = client
+          end
+
+          # Get the configuration of an addon.
+          def create(team_id, addon_id)
+            @client.request(:post, "#{BASE_PATH}/#{team_id}/addons/#{addon_id}/sso")
+          end
+
+          # Mark an addon as deprovisioned with callback URL.
+          def create_with_callback_url(callback_url)
+            @client.request(:post, "sso", base_url: callback_url)
+          end
         end
 
         # Configuration of an Addon
